@@ -166,7 +166,7 @@ void button3() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 3");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
@@ -180,7 +180,7 @@ void button4() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 4");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
@@ -194,7 +194,7 @@ void button5() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 5");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
@@ -208,7 +208,7 @@ void button6() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 6");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
@@ -222,7 +222,7 @@ void button7() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 7");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
@@ -236,7 +236,7 @@ void button8() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 8");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
@@ -250,7 +250,7 @@ void button9() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 9");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
@@ -264,7 +264,7 @@ void button10() {
     irsend.sendNEC(0x60C08F7, 32);     // send ir code
     display.clearDisplay();
     display.setCursor(0, 30);
-    display.println(" button 2");
+    display.println(" button 10");
     display.display();
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
