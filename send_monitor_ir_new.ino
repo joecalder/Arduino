@@ -3,6 +3,14 @@
 
 //#################  OLED DISPLAY  ###################################################
 DisplaySSD1306_128x64_I2C display(-1);
+char *print_this[] = {"Welcome.",
+                     "Button 1",
+                     "Button 2",
+                     "Button 3,
+                     "Button 4",
+                     "Button 5"
+                    };
+
 
 //#################  IR Receiver & Sender ############################################
 const int RECV_PIN = 7;
@@ -38,9 +46,6 @@ const int button9Pin = 10;     // the number of the digital input pin
 int button9State = 0;         // variable for reading the pushbutton status
 const int button10Pin = 11;     // the number of the digital input pin
 int button10State = 0;         // variable for reading the pushbutton status
-
-
-//char print_this[] = "Welcome."; //variable to print on screen...may no longer need this.
 
 void setup()
 {
@@ -89,10 +94,7 @@ void setup()
 void loop()
 {
     //#################  OLED DISPLAY  ###################################################
-    lcd_delay(1000);
-    display.clear();
-    display.printFixed(0, 16, "Welcome.", STYLE_BOLD);
-
+    displaystuff();
     //#################  BUTTONS  ########################################################
     button1();
 //    button2();
@@ -119,7 +121,12 @@ void loop()
 
 }
 
-
+//#################  OLED DISPLAY  ###################################################
+void displaystuff() {
+    lcd_delay(1000);
+    display.clear();
+    display.printFixed(0, 16, print_this[0], STYLE_BOLD);
+}
 
 //#################  IR Receiver  ####################################################
 void receiver() {
