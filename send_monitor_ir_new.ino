@@ -3,13 +3,8 @@
 
 //#################  OLED DISPLAY  ###################################################
 DisplaySSD1306_128x64_I2C display(-1);
-char *print_this[] = {"Welcome.",
-                     "Button 1",
-                     "Button 2",
-                     "Button 3,
-                     "Button 4",
-                     "Button 5"
-                    };
+char * print_this[] = {"Welcome."};
+pt = print_this; // write to the array print_this by using pt
 
 
 //#################  IR Receiver & Sender ############################################
@@ -48,7 +43,7 @@ const int button10Pin = 11;     // the number of the digital input pin
 int button10State = 0;         // variable for reading the pushbutton status
 
 void setup()
-{
+{   Serial.begin(9600);
     //#################  OLED DISPLAY  ###################################################
     /* Select the font to use with menu and all font functions */
     display.setFixedFont( ssd1306xled_font6x8 );
@@ -145,8 +140,9 @@ void button1() {
   button1State = digitalRead(button1Pin);
   if (button1State == HIGH) {
     irsend.sendNEC(0x60C08F7, 32);    // send ir code
-    display.clear();
-    display.printFixed(0, 16, "Button 1", STYLE_BOLD);
+    pt = {"Button 1"};
+    //display.clear();
+    //display.printFixed(0, 16, "Button 1", STYLE_BOLD);
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
     stickup();
