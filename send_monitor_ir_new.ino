@@ -49,29 +49,28 @@ void setup()
     display.setFixedFont( ssd1306xled_font6x8 );
     display.begin();
     display.clear();
-    menu.show( display );
     
     //#################  BUTTONS  ########################################################
     button1();
-    button2();
-    button3();
-    button4();
-    button5();
-    button6();
-    button7();
-    button8();
-    button9();
-    button10();
+//    button2();
+//    button3();
+//    button4();
+//    button5();
+//    button6();
+//    button7();
+//    button8();
+//    button9();
+//    button10();
     pinMode(button1Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button2Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button3Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button4Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button5Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button6Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button7Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button8Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button9Pin, INPUT);  // initialize the pushbutton pin as an input:
-    pinMode(button10Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button2Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button3Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button4Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button5Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button6Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button7Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button8Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button9Pin, INPUT);  // initialize the pushbutton pin as an input:
+//    pinMode(button10Pin, INPUT);  // initialize the pushbutton pin as an input:
 
     //#################  JOYSTICK  #######################################################
     stickup();
@@ -96,15 +95,15 @@ void loop()
 
     //#################  BUTTONS  ########################################################
     button1();
-    button2();
-    button3();
-    button4();
-    button5();
-    button6();
-    button7();
-    button8();
-    button9();
-    button10();
+//    button2();
+//    button3();
+//    button4();
+//    button5();
+//    button6();
+//    button7();
+//    button8();
+//    button9();
+//    button10();
 
     //#################  JOYSTICK  #######################################################
     stickup();
@@ -139,10 +138,8 @@ void button1() {
   button1State = digitalRead(button1Pin);
   if (button1State == HIGH) {
     irsend.sendNEC(0x60C08F7, 32);    // send ir code
-    display.clearDisplay();
-    display.setCursor(0, 30);
-    display.println(" button 1");
-    display.display();
+    display.clear();
+    display.printFixed(0, 16, "Button 1", STYLE_BOLD);
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
   } else {
     stickup();
@@ -152,27 +149,19 @@ void button1() {
 //#################  JOYSTICK  #######################################################
 void stickup() {
   //joystick up
-  if (xPosition > 1000 and xPosition < 1040
-      and yPosition > 510 and yPosition < 530) { //stick up
-    display.clearDisplay();
-    display.display();
-    display.setCursor(0, 30);
-    display.println("     Stick UP");
-    display.display();
-  } else {
+  if (xPosition > 1000) {
+    display.clear();
+    display.printFixed(0, 16, "Stick UP", STYLE_BOLD);
+    } else {
     stickdown();
   }
 }
 
 void stickdown() {
   //joystick down
-  if (xPosition > 0 and xPosition < 20
-      and yPosition > 510 and yPosition < 530) { //stick down
-    display.clearDisplay();
-    display.display();
-    display.setCursor(0, 30);
-    display.println("     Stick DOWN");
-    display.display();
+  if (xPosition < 20) {
+    display.clear();
+    display.printFixed(0, 16, "Stick DOWN", STYLE_BOLD);
   } else {
     stickleft();
   }
@@ -180,13 +169,9 @@ void stickdown() {
 
 void stickleft() {
   //joystick left
-  if (xPosition > 490 and xPosition < 510
-      and yPosition > 1005 and yPosition < 1035) { //stick left
-    display.clearDisplay();
-    display.display();
-    display.setCursor(0, 30);
-    display.println("     Stick LEFT");
-    display.display();
+  if (yPosition < 20) {
+    display.clear();
+    display.printFixed(0, 16, "Stick LEFT", STYLE_BOLD);
   } else {
     stickright();
   }
@@ -194,12 +179,8 @@ void stickleft() {
 
 void stickright() {
   //joystick right
-  if (xPosition > 490 and xPosition < 520
-      and yPosition > 0 and yPosition < 75) { //stick right
-    display.clearDisplay();
-    display.display();
-    display.setCursor(0, 30);
-    display.println("     Stick RIGHT");
-    display.display();
+  if (yPosition > 1000) {
+    display.clear();
+    display.printFixed(0, 16, "Stick RIGHT", STYLE_BOLD);
   } else {  }
 }
