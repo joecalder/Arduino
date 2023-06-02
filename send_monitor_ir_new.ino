@@ -3,12 +3,10 @@
 
 //#################  OLED DISPLAY  ###################################################
 DisplaySSD1306_128x64_I2C display(-1);
-char * print_this[] = {"Welcome."};
-pt = print_this; // write to the array print_this by using pt
-
+//char print_this[] = {"Welcome."};
 
 //#################  IR Receiver & Sender ############################################
-const int RECV_PIN = 7;
+const int RECV_PIN = 12;
 //send pin == 3 //for INFO only since this is default
 IRrecv irrecv(RECV_PIN);
 decode_results results;
@@ -43,13 +41,14 @@ const int button10Pin = 11;     // the number of the digital input pin
 int button10State = 0;         // variable for reading the pushbutton status
 
 void setup()
-{   Serial.begin(9600);
+{   Serial.begin(115200);
     //#################  OLED DISPLAY  ###################################################
     /* Select the font to use with menu and all font functions */
     display.setFixedFont( ssd1306xled_font6x8 );
     display.begin();
     display.clear();
-    
+    display.printFixed(0, 16, "Welcome.", STYLE_BOLD);
+       
     //#################  BUTTONS  ########################################################
     button1();
 //    button2();
@@ -87,11 +86,12 @@ void setup()
 
 
 void loop()
-{
+{   
     //#################  OLED DISPLAY  ###################################################
-    displaystuff();
+    //displaystuff();
+
     //#################  BUTTONS  ########################################################
-    button1();
+      button1();
 //    button2();
 //    button3();
 //    button4();
@@ -113,14 +113,6 @@ void loop()
     //#################  IR Receiver  ####################################################
     receiver();
 
-
-}
-
-//#################  OLED DISPLAY  ###################################################
-void displaystuff() {
-    lcd_delay(1000);
-    display.clear();
-    display.printFixed(0, 16, print_this[0], STYLE_BOLD);
 }
 
 //#################  IR Receiver  ####################################################
@@ -128,8 +120,12 @@ void receiver() {
   //receive IR codes
   if (irrecv.decode(&results))
   { display.clear();
-    display.printFixed(0, 16, "Received IR", STYLE_BOLD);
-    display.printFixed(0, 24, results.value, STYLE_BOLD);
+    display.printFixed(0, 16, "Received IR....", STYLE_BOLD);
+    //display.printFixed(0, 16, (char(results.value, HEX)));
+    display.printFixed(0, 24,dtostrf((results.value, HEX)), STYLE_NORMAL);
+    Serial.print("received IR: ");
+    Serial.println(results.value, HEX);
+    
     irrecv.resume();
     } else { //button1();
       }
@@ -140,13 +136,10 @@ void button1() {
   button1State = digitalRead(button1Pin);
   if (button1State == HIGH) {
     irsend.sendNEC(0x60C08F7, 32);    // send ir code
-    pt = {"Button 1"};
-    //display.clear();
-    //display.printFixed(0, 16, "Button 1", STYLE_BOLD);
+    display.clear();
+    display.printFixed(0, 16, "Button 1", STYLE_BOLD);
     irrecv.enableIRIn();//re-enable the "receive" timer since send and receive use the same timer
-  } else {
-    stickup();
-  }
+  } else {  }
 }
 
 //#################  JOYSTICK  #######################################################
@@ -155,9 +148,7 @@ void stickup() {
   if (xPosition > 1000) {
     display.clear();
     display.printFixed(0, 16, "Stick UP", STYLE_BOLD);
-    } else {
-    stickdown();
-  }
+    } else {  }
 }
 
 void stickdown() {
@@ -165,9 +156,7 @@ void stickdown() {
   if (xPosition < 20) {
     display.clear();
     display.printFixed(0, 16, "Stick DOWN", STYLE_BOLD);
-  } else {
-    stickleft();
-  }
+  } else {  }
 }
 
 void stickleft() {
@@ -175,9 +164,7 @@ void stickleft() {
   if (yPosition < 20) {
     display.clear();
     display.printFixed(0, 16, "Stick LEFT", STYLE_BOLD);
-  } else {
-    stickright();
-  }
+  } else {  }
 }
 
 void stickright() {
