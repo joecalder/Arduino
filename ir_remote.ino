@@ -158,17 +158,36 @@ void printRemoteCode()
          }
 }
 // CODES, etc
+//Onkyo
 //IrSender.sendNECRaw(0xFB046DD2, 1); //onkyo receiver on
 //IrSender.sendNECRaw(0xB8476CD2, 1); //onkyo receiver off
 //IrSender.sendNECRaw(0xFD026DD2, 1); //onkyo volume up
 //IrSender.sendNECRaw(0xFC036DD2, 1); //onkyo volume down
+//Roku
+//Protocol=NEC Address=0xC4EA Command=0x2D Raw-Data=0xD22DC4EA 32 bits LSB first //roku right
+//Protocol=NEC Address=0xC4EA Command=0x33 Raw-Data=0xCC33C4EA 32 bits LSB first //roku down
+//Protocol=NEC Address=0xC4EA Command=0x1E Raw-Data=0xE11EC4EA 32 bits LSB first //roku left
+//Protocol=NEC Address=0xC4EA Command=0x19 Raw-Data=0xE619C4EA 32 bits LSB first //roku up
+//Protocol=NEC Address=0xC4EA Command=0x2A Raw-Data=0xD52AC4EA 32 bits LSB first //roku select
+//Protocol=NEC Address=0xC4EA Command=0x66 Raw-Data=0x9966C4EA 32 bits LSB first //roku back
+//Protocol=NEC Address=0xC4EA Command=0x3 Raw-Data=0xFC03C4EA 32 bits LSB first //roku home
+//Protocol=NEC Address=0xC4EA Command=0x4C Raw-Data=0xB34CC4EA 32 bits LSB first //roku play/pause
+//Protocol=NEC Address=0xC4EA Command=0x34 Raw-Data=0xCB34C4EA 32 bits LSB first //roku rewind
+//Protocol=NEC Address=0xC4EA Command=0x55 Raw-Data=0xAA55C4EA 32 bits LSB first //roku forward
+//Protocol=NEC Address=0xC4EA Command=0xC Raw-Data=0xF30CC4EA 32 bits LSB first //roku power off
+
+
+
+
+
+
 
 
 //#################  BUTTONS  ########################################################
 void button1() {
   button1State = digitalRead(button1Pin);
   if (button1State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 1);
+    IrSender.sendNEC(0x60C08F7, 32); 
     display.clear();
     display.printFixed(16, 8, "Button 1", STYLE_BOLD);
     delay(200);
@@ -178,7 +197,7 @@ void button1() {
 void button2() {
   button2State = digitalRead(button2Pin);
   if (button2State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 1);
+    IrSender.sendNEC(0x60C08F7, 32);
     display.clear();
     display.printFixed(16, 8, "Button 2", STYLE_BOLD);
     delay(200);
@@ -190,7 +209,7 @@ void button3() {
   if (button3State == HIGH) {
     IrSender.sendNECRaw(0xFD026DD2, 1); //onkyo volume up
     display.clear();
-    display.printFixed(16, 8, "Button 3", STYLE_BOLD);
+    display.printFixed(16, 8, "Volume UP", STYLE_BOLD);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -198,7 +217,7 @@ void button3() {
 void button4() {
   button4State = digitalRead(button4Pin);
   if (button4State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 4", STYLE_BOLD);
     delay(200);
@@ -208,7 +227,7 @@ void button4() {
 void button5() {
   button5State = digitalRead(button5Pin);
   if (button5State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 5", STYLE_BOLD);
     delay(200);
@@ -219,8 +238,11 @@ void button6() {//volume up
   button6State = digitalRead(button6Pin);
   if (button6State == HIGH) {
     IrSender.sendNECRaw(0xFB046DD2, 1); //onkyo receiver on
+    delay(50);
+    IrSender.sendNEC(0xFC03C4EA, 32);    // roku home/on
     display.clear();
-    display.printFixed(16, 8, "Button 6", STYLE_BOLD);
+    display.printFixed(32, 8, "Power ON", STYLE_BOLD);
+    display.printFixed(32, 32, "Roku Home", STYLE_BOLD);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -230,7 +252,7 @@ void button7() {
   if (button7State == HIGH) {
     IrSender.sendNECRaw(0xFC036DD2, 1); //onkyo volume down
     display.clear();
-    display.printFixed(16, 8, "Button 7", STYLE_BOLD);
+    display.printFixed(16, 8, "Volume DOWN", STYLE_BOLD);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -238,7 +260,7 @@ void button7() {
 void button8() {
   button8State = digitalRead(button8Pin);
   if (button8State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 8", STYLE_BOLD);
     delay(200);
@@ -248,7 +270,7 @@ void button8() {
 void button9() {
   button9State = digitalRead(button9Pin);
   if (button9State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 9", STYLE_BOLD);
     delay(200);
@@ -258,9 +280,9 @@ void button9() {
 void button10() {//power off
   button10State = digitalRead(button10Pin);
   if (button10State == HIGH) {
-    IrSender.sendNECRaw(0xB8476CD2, 1);    // send ir code
+    IrSender.sendNECRaw(0xB8476CD2, 1);//onkyo power off
     display.clear();
-    display.printFixed(16, 8, "Button 10", STYLE_BOLD);
+    display.printFixed(16, 8, "Power OFF", STYLE_BOLD);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -270,7 +292,7 @@ void button10() {//power off
 void stickup() {
   //joystick up
   if (xPosition > 1000) {
-    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Stick UP", STYLE_BOLD);
     delay(200);
@@ -281,7 +303,7 @@ void stickup() {
 void stickdown() {
   //joystick down
   if (xPosition < 20) {
-    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Stick DOWN", STYLE_BOLD);
     delay(200);
@@ -292,7 +314,7 @@ void stickdown() {
 void stickleft() {
   //joystick left
   if (yPosition < 20) {
-    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Stick LEFT", STYLE_BOLD);
     delay(200);
