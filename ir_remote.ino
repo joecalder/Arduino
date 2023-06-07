@@ -163,6 +163,8 @@ void printRemoteCode()
 //IrSender.sendNECRaw(0xB8476CD2, 1); //onkyo receiver off
 //IrSender.sendNECRaw(0xFD026DD2, 1); //onkyo volume up
 //IrSender.sendNECRaw(0xFC036DD2, 1); //onkyo volume down
+//Protocol=NEC Address=0x6DD2 Command=0x5 Raw-Data=0xFA056DD2 32 bits LSB first //onkyo mute
+
 //Roku
 //Protocol=NEC Address=0xC4EA Command=0x2D Raw-Data=0xD22DC4EA 32 bits LSB first //roku right
 //Protocol=NEC Address=0xC4EA Command=0x33 Raw-Data=0xCC33C4EA 32 bits LSB first //roku down
