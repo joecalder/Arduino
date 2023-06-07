@@ -168,7 +168,7 @@ void printRemoteCode()
 void button1() {
   button1State = digitalRead(button1Pin);
   if (button1State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 32); // activate red party light
+    IrSender.sendNEC(0x60C08F7, 1);
     display.clear();
     display.printFixed(16, 8, "Button 1", STYLE_BOLD);
     delay(200);
@@ -178,7 +178,7 @@ void button1() {
 void button2() {
   button2State = digitalRead(button2Pin);
   if (button2State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);
     display.clear();
     display.printFixed(16, 8, "Button 2", STYLE_BOLD);
     delay(200);
@@ -198,7 +198,7 @@ void button3() {
 void button4() {
   button4State = digitalRead(button4Pin);
   if (button4State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 4", STYLE_BOLD);
     delay(200);
@@ -208,7 +208,7 @@ void button4() {
 void button5() {
   button5State = digitalRead(button5Pin);
   if (button5State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 5", STYLE_BOLD);
     delay(200);
@@ -218,8 +218,7 @@ void button5() {
 void button6() {//volume up
   button6State = digitalRead(button6Pin);
   if (button6State == HIGH) {
-    //IrSender.sendNEC(0x60C08F7, 32);    // send ir code
-    IrSender.sendNECRaw(0xFB046DD2, 16); //onkyo receiver on
+    IrSender.sendNECRaw(0xFB046DD2, 1); //onkyo receiver on
     display.clear();
     display.printFixed(16, 8, "Button 6", STYLE_BOLD);
     delay(200);
@@ -239,7 +238,7 @@ void button7() {
 void button8() {
   button8State = digitalRead(button8Pin);
   if (button8State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 8", STYLE_BOLD);
     delay(200);
@@ -249,7 +248,7 @@ void button8() {
 void button9() {
   button9State = digitalRead(button9Pin);
   if (button9State == HIGH) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 9", STYLE_BOLD);
     delay(200);
@@ -259,7 +258,7 @@ void button9() {
 void button10() {//power off
   button10State = digitalRead(button10Pin);
   if (button10State == HIGH) {
-    IrSender.sendNECRaw(0xB8476CD2, 16);    // send ir code
+    IrSender.sendNECRaw(0xB8476CD2, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Button 10", STYLE_BOLD);
     delay(200);
@@ -271,7 +270,7 @@ void button10() {//power off
 void stickup() {
   //joystick up
   if (xPosition > 1000) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Stick UP", STYLE_BOLD);
     delay(200);
@@ -282,7 +281,7 @@ void stickup() {
 void stickdown() {
   //joystick down
   if (xPosition < 20) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Stick DOWN", STYLE_BOLD);
     delay(200);
@@ -293,7 +292,7 @@ void stickdown() {
 void stickleft() {
   //joystick left
   if (yPosition < 20) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0x60C08F7, 1);    // send ir code
     display.clear();
     display.printFixed(16, 8, "Stick LEFT", STYLE_BOLD);
     delay(200);
