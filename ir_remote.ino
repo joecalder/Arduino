@@ -187,7 +187,8 @@ void button2() {
   if (button2State == HIGH) {
     IrSender.sendNEC(0xD52AC4EA, 32); //roku select
     display.clear();
-    display.printFixedN(0, 16, "Roku Select", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(24, 16, "Roku", STYLE_BOLD, FONT_SIZE_2X);
+      display.printFixedN(14, 32, "Select", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {   }
@@ -197,7 +198,8 @@ void button3() {
   if (button3State == HIGH) {
     IrSender.sendNEC(0xCB34C4EA, 32); //roku rewind
     display.clear();
-    display.printFixedN(0, 16, "Roku Rewind", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(24, 16, "Roku", STYLE_BOLD, FONT_SIZE_2X);
+      display.printFixedN(14, 32, "Rewind", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -207,8 +209,8 @@ void button4() {
   if (button4State == HIGH) {
     IrSender.sendNEC(0xB34CC4EA, 32);    // roku play/pause
     display.clear();
-    display.printFixedN(0, 16, "Roku Play", STYLE_BOLD, FONT_SIZE_2X);
-      display.printFixedN(8, 32, "/ Pause", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(8, 16, "Roku Play", STYLE_BOLD, FONT_SIZE_2X);
+      display.printFixedN(12, 32, "/ Pause", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -218,8 +220,8 @@ void button5() {
   if (button5State == HIGH) {
     IrSender.sendNEC(0xAA55C4EA, 32);    // roku fast forward
     display.clear();
-    display.printFixedN(0, 16, "Roku Fast", STYLE_BOLD, FONT_SIZE_2X);
-      display.printFixedN(8, 32, "Forward", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(8, 16, "Roku Fast", STYLE_BOLD, FONT_SIZE_2X);
+      display.printFixedN(16, 32, "Forward", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -242,8 +244,8 @@ void button7() {
   if (button7State == HIGH) {
     IrSender.sendNECRaw(0xFC036DD2, 1); //onkyo volume down
     display.clear();
-    display.printFixedN(8, 8, "Volume", STYLE_BOLD, FONT_SIZE_2X);
-    display.printFixedN(12, 32, "Down", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(16, 8, "Volume", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(24, 32, "Down", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -253,8 +255,8 @@ void button8() {
   if (button8State == HIGH) {
     IrSender.sendNECRaw(0xFD026DD2, 1);    // onkyo volume up
     display.clear();
-    display.printFixedN(8, 8, "Volume", STYLE_BOLD, FONT_SIZE_2X);
-    display.printFixedN(16, 32, "Up", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(16, 8, "Volume", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(32, 32, "Up", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -264,7 +266,7 @@ void button9() {
   if (button9State == HIGH) {
     IrSender.sendNECRaw(0xFA056DD2, 1);    // onkyo mute
     display.clear();
-    display.printFixedN(8, 16, "MUTE", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(24, 24, "MUTE", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {  }
@@ -284,44 +286,40 @@ void button10() {
 
 //#################  JOYSTICK  #######################################################
 void stickup() {
-  //joystick up
   if (xPosition > 1000) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0xE619C4EA, 32);    // roku up
     display.clear();
-    display.printFixedN(0, 16, "Roku UP", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(24, 0, "Roku UP", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
     } else {  }
 }
 
 void stickdown() {
-  //joystick down
   if (xPosition < 20) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0xCC33C4EA, 32);    // roku down
     display.clear();
-    display.printFixedN(0, 16, "Roku DOWN", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(12, 48, "Roku DOWN", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
   } else {  }
 }
 
 void stickleft() {
-  //joystick left
   if (yPosition < 20) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0xE11EC4EA, 32);    // roku left
     display.clear();
-    display.printFixedN(0, 16, "Roku LEFT", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(0, 24, "Roku LEFT", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
   } else {  }
 }
 
 void stickright() {
-  //joystick right
   if (yPosition > 1000) {
-    IrSender.sendNEC(0x60C08F7, 32);    // send ir code
+    IrSender.sendNEC(0xD22DC4EA, 32);    // roku right
     display.clear();
-    display.printFixedN(0, 16, "Roku RIGHT", STYLE_BOLD, FONT_SIZE_2X);
+    display.printFixedN(8, 24, "Roku RIGHT", STYLE_BOLD, FONT_SIZE_2X);
     delay(200);
     IrReceiver.resume();
   } else {  }
