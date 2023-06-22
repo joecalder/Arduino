@@ -1,3 +1,4 @@
+//ARDUINO NANO version
 //#define DECODE_NEC
 #include <Arduino.h>
 #include <IRremote.hpp>
