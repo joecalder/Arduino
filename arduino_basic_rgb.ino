@@ -22,7 +22,6 @@ void setup() {
   pixels.begin();
   colorWipe(pixels.Color( 240, 230, 70), 50); //startup color
   Serial.begin(9066);
-
 }
 
 void loop() {
@@ -30,15 +29,15 @@ void loop() {
 
   // Check if the absolute difference exceeds the threshold
   if(abs(PotVal - previousAnalog) > threshold) {
-    if(PotVal >=20) {
+    if(PotVal >=10) {
       OutVal = map(PotVal, 0, 1023, 0, 255);
       pixels.setBrightness(OutVal);
       pixels.show();
       Serial.print("PotVal: ");
       Serial.println(PotVal);
     }
-    if(PotVal <20) { //set lower threshhold so LEDs always illuminate
-      OutVal = 20;
+    if(PotVal <10) { //set lower threshhold so LEDs always illuminate
+      OutVal = 10;
       pixels.setBrightness(OutVal);
       pixels.show();
       Serial.print("PotVal at lower threshhold.");
