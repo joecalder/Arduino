@@ -38,7 +38,9 @@ void loop() {
       Serial.println(PotVal);
     }
     if(PotVal <20) { //set lower threshhold so LEDs always illuminate
-      OutVal = 20
+      OutVal = 20;
+      pixels.setBrightness(OutVal);
+      pixels.show();
       Serial.print("PotVal at lower threshhold.");
     }
     // ---------------------------
@@ -90,4 +92,3 @@ void colorWipe(uint32_t color, int wait) {
     delay(wait);
   }
 }
-
