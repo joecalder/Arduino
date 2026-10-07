@@ -56,7 +56,7 @@ void loop() {
     //check if button is still low
     newState = digitalRead(BUTTON_PIN);
     if(newState == LOW) {   //yes, still low
-      if(++mode > 5) mode = 0; //advance to next mode, wrap after max
+      if(++mode > 6) mode = 0; //advance to next mode, wrap after max
       switch(mode) {
         case 0:
           colorWipe(pixels.Color( 240, 230, 70), 50); //warm white-ish
@@ -74,8 +74,12 @@ void loop() {
           colorWipe(pixels.Color( 0, 0, 255), 50); //blue
           break;
         case 5:
+          flame(50); //flame effect
+          break;
+        case 6:
           colorWipe(pixels.Color( 0, 0, 0), 50); //off
           break;
+
       }
     }
   }
@@ -91,3 +95,16 @@ void colorWipe(uint32_t color, int wait) {
     delay(wait);
   }
 }
+
+void flame(int wait) {
+  for(int i=0; i<pixels.numPixels(); i++ ) { // for each pixel
+    //generate random flame flicker values
+    int redVal   = random(150, 256); //high red values
+    int greenVal = random(20, 80);   //low to medium green
+    int blueVal  = 0; //no blue
+    pixels.setPixelColor(i, color(redVal, greenVal, blueVal)); // set pixel color (in RAM)
+    pixels.show();
+    delay(wait);
+  }
+}
+
