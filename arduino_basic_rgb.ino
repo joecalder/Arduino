@@ -73,13 +73,23 @@ void loop() {
         case 4:
           colorWipe(pixels.Color( 0, 0, 255), 50); //blue
           break;
-        case 5:
-          flame(50); //flame effect
+        case 5: //flame on
+          while (true) {
+            int redValue = random(180, 256);    // Strong red base (180 - 255)
+            int greenValue = random(40, 130);   // Flickering yellow/orange component (40 - 130)
+            int blueValue = 0;                // No blue in a natural flame
+            pixels.setPixelColor(0, pixels.Color(redValue, greenValue, blueValue));
+            pixels.show();
+            // Random delay to mimic the natural flicker speed of fire
+            delay(random(177, 300));
+            if(digitalRead(BUTTON_PIN) == LOW) {
+              break;
+            }
+          }
           break;
         case 6:
           colorWipe(pixels.Color( 0, 0, 0), 50); //off
           break;
-
       }
     }
   }
@@ -95,16 +105,3 @@ void colorWipe(uint32_t color, int wait) {
     delay(wait);
   }
 }
-
-void flame(int wait) {
-  for(int i=0; i<pixels.numPixels(); i++ ) { // for each pixel
-    //generate random flame flicker values
-    int redVal   = random(150, 256); //high red values
-    int greenVal = random(20, 80);   //low to medium green
-    int blueVal  = 0; //no blue
-    pixels.setPixelColor(i, color(redVal, greenVal, blueVal)); // set pixel color (in RAM)
-    pixels.show();
-    delay(wait);
-  }
-}
-
